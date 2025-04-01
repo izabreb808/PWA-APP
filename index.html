@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My first PWA app</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <h1>My first PWA app</h1> 
+    <p>What is your name?</p>
+    <input class="name" type="text" id="name"/>
+    <button id="submit" type="submit" onClick="hello()">Submit</button>
+    <div id="hello" class="hello" style="display:none;">
+        <p>Hello <span id="userName"></span>!</p> 
+    </div>
+    <script src="script.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(function() {
+                    console.log('Service Worker registred');
+                })
+                .catch(function(error) {
+                    console.error('An error occured during Service Worker registration:', error);
+                });
+        }
+    </script>
+</body>
+</html>
