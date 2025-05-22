@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My first PWA app</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+    <div id="loginPage" class="loginPage">
+      <p id="msg"></p>
+       <form id="login-form">
+      <label>
+        Nazwa:
+        <input type="text" name="name" required />
+      </label>
+
+      <label>
+        Hasło:
+        <input type="password" name="password" required />
+      </label>
+
+      <button type="submit">Zaloguj</button>
+    </form>
+    </div>
+
+    <script>
+    const form = document.getElementById("login-form");
+    const msg = document.getElementById("msg");
+
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = form.name.value;
+      const password = form.password.value;
+
+      // Przykładowa walidacja lokalna
+      if (name === "iza" && password === "iza") {
+        console.log("Zalogowano pomyślnie");
+        localStorage.setItem("loggedIn", "true");
+        msg.textContent = "✅ Zalogowano! Przekierowanie...";
+        setTimeout(() => window.location.href = "home.html", 1000);
+      } else {
+        console.log("Błędne dane logowania");
+        msg.textContent = "❌ Błędny email lub hasło.";
+      }
+    });
+  </script>
+    <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("✅ Service Worker zarejestrowany"))
+        .catch(err => console.error("❌ Rejestracja SW nie powiodła się", err));
+    });
+  }
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wybierz książkę dla siebie</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+  <header>
+    <h1>📚 Wyszukiwarka książek</h1>
+  </header>
+
+  <main>
+    <form id="search-form">
+      <input type="text" id="query" placeholder="Szukaj książki..." required />
+      <button type="submit">Szukaj</button>
+    </form>
+
+    <section id="results">>
+      <h2>Wyniki wyszukiwania</h2>
+    </section>
+  </main>
+
+  <footer>
+    <a href="toRead.html">📖 Ulubione</a>
+  </footer>
+
+  <script>
+  if (!localStorage.getItem("loggedIn")) {
+    window.location.href = "login.html";
+  }
+</script>
+
+  <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("✅ Service Worker zarejestrowany"))
+        .catch(err => console.error("❌ Rejestracja SW nie powiodła się", err));
+    });
+  }
+</script>
+
+</body>
+</html>

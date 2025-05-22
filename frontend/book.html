@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#4a90e2" />
+  <title>Szczegóły książki</title>
+  <link rel="manifest" href="../manifest.json" />
+  <link rel="stylesheet" href="../style.css" />
+  <script defer src="../backend/indexedDB.js"></script>
+  <script defer src="../backend/book.js"></script>
+</head>
+<body>
+  <header>
+    <h1>📖 Szczegóły książki</h1>
+  </header>
+
+  <main id="book-details">
+    <p>Ładowanie...</p>
+  </main>
+
+  <footer>
+    <a href="home.html">⬅ Wróć</a>
+    <a href="toRead.html">📚 Ulubione</a>
+  </footer>
+
+<script>
+  if (!localStorage.getItem("loggedIn")) {
+    window.location.href = "login.html";
+  }
+</script>
+
+  <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("✅ Service Worker zarejestrowany"))
+        .catch(err => console.error("❌ Rejestracja SW nie powiodła się", err));
+    });
+  }
+</script>
+
+</body>
+</html>
