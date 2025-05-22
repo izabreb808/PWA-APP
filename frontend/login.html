@@ -41,17 +41,17 @@
     </div>
 
     <script>
-    const formLog = document.getElementById("login-form");
-    const formReg = document.getElementById("register-form");
-    const msg = document.getElementById("msg");
+const formLog = document.getElementById("login-form");
+const formReg = document.getElementById("register-form");
+const msg = document.getElementById("msg");
 
+// LOGOWANIE
+formLog.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = formLog.elements["name"].value.trim();
+  const password = formLog.elements["password"].value;
 
-    formLog.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = form.name.value;
-      const password = form.password.value
-
-     const storedUser = JSON.parse(localStorage.getItem("registeredUser"));
+  const storedUser = JSON.parse(localStorage.getItem("registeredUser"));
 
   if (!storedUser) {
     msg.textContent = "❌ Brak zarejestrowanego użytkownika. Zarejestruj się najpierw.";
@@ -62,31 +62,31 @@
     localStorage.setItem("loggedIn", "true");
     msg.textContent = "✅ Zalogowano! Przekierowanie...";
     setTimeout(() => {
-      window.location.href = "home.html"; 
+      window.location.href = "home.html";
     }, 1000);
   } else {
     msg.textContent = "❌ Nieprawidłowa nazwa użytkownika lub hasło.";
   }
-    });
+});
 
-    formReg.addEventListener("newSubmit", (e) => {
-      e.preventDefault();
-      const form = document.getElementById("register-form");
-      const name = form.newName.value;
-      const password = form.newPassword.value
+// REJESTRACJA
+formReg.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const username = formReg.elements["username"].value.trim();
+  const password = formReg.elements["password"].value;
 
-      if (!username || !password) {
-        msg.textContent = "❌ Uzupełnij wszystkie pola.";
-        return;
-      }
+  if (!username || !password) {
+    msg.textContent = "❌ Uzupełnij wszystkie pola.";
+    return;
+  }
 
-      const userData = { username, password };
-      localStorage.setItem("registeredUser", JSON.stringify(userData));
+  const userData = { username, password };
+  localStorage.setItem("registeredUser", JSON.stringify(userData));
 
-      msg.textContent = "✅ Rejestracja udana! Możesz się zalogować.";
-      form.reset();
-    });
-  </script>
+  msg.textContent = "✅ Rejestracja udana! Możesz się zalogować.";
+  formReg.reset();
+});
+</script>
     <script>
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {

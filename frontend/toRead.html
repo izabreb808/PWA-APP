@@ -20,12 +20,23 @@
 
   <footer>
     <a href="home.html">⬅ Wróć do wyszukiwarki</a>
+    <button id="logout-btn">Wyloguj</button>
   </footer>
 
   <script>
   if (!localStorage.getItem("loggedIn")) {
     window.location.href = "login.html";
   }
+
+  const logoutBtn = document.getElementById("logout-btn");
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("loggedIn");
+    window.location.href = "login.html";  // przekierowanie na login
+  });
+}
+
 </script>
 
   <script>
