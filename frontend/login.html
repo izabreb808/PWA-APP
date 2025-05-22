@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My first PWA app</title>
+    <title>Zaloguj</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="manifest" href="../manifest.json">
 </head>
 <body>
     <div id="loginPage" class="loginPage">
       <p id="msg"></p>
+      <h1>Logowanie</h1>
        <form id="login-form">
       <label>
         Nazwa:
@@ -23,28 +24,67 @@
 
       <button type="submit">Zaloguj</button>
     </form>
+
+        <h1>Rejestracja</h1>
+    <form id="register-form">
+      <label>
+        Nazwa użytkownika:
+        <input type="text" name="username" required />
+      </label>
+      <label>
+        Hasło:
+        <input type="password" name="password" required />
+      </label>
+      <button type="submit">Zarejestruj</button>
+      <p id="msg"></p>
+    </form>
     </div>
 
     <script>
-    const form = document.getElementById("login-form");
+    const formLog = document.getElementById("login-form");
+    const formReg = document.getElementById("register-form");
     const msg = document.getElementById("msg");
 
 
-    form.addEventListener("submit", (e) => {
+    formLog.addEventListener("submit", (e) => {
       e.preventDefault();
       const name = form.name.value;
-      const password = form.password.value;
+      const password = form.password.value
 
-      // Przykładowa walidacja lokalna
-      if (name === "iza" && password === "iza") {
-        console.log("Zalogowano pomyślnie");
-        localStorage.setItem("loggedIn", "true");
-        msg.textContent = "✅ Zalogowano! Przekierowanie...";
-        setTimeout(() => window.location.href = "home.html", 1000);
-      } else {
-        console.log("Błędne dane logowania");
-        msg.textContent = "❌ Błędny email lub hasło.";
+     const storedUser = JSON.parse(localStorage.getItem("registeredUser"));
+
+  if (!storedUser) {
+    msg.textContent = "❌ Brak zarejestrowanego użytkownika. Zarejestruj się najpierw.";
+    return;
+  }
+
+  if (name === storedUser.username && password === storedUser.password) {
+    localStorage.setItem("loggedIn", "true");
+    msg.textContent = "✅ Zalogowano! Przekierowanie...";
+    setTimeout(() => {
+      window.location.href = "home.html"; 
+    }, 1000);
+  } else {
+    msg.textContent = "❌ Nieprawidłowa nazwa użytkownika lub hasło.";
+  }
+    });
+
+    formReg.addEventListener("newSubmit", (e) => {
+      e.preventDefault();
+      const form = document.getElementById("register-form");
+      const name = form.newName.value;
+      const password = form.newPassword.value
+
+      if (!username || !password) {
+        msg.textContent = "❌ Uzupełnij wszystkie pola.";
+        return;
       }
+
+      const userData = { username, password };
+      localStorage.setItem("registeredUser", JSON.stringify(userData));
+
+      msg.textContent = "✅ Rejestracja udana! Możesz się zalogować.";
+      form.reset();
     });
   </script>
     <script>

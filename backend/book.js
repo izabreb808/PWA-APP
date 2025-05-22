@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
-  const bookKey = params.get("id"); // np. /works/OL123W
+  const bookKey = params.get("id"); // Pobierz ID książki z URL
   const detailsEl = document.getElementById("book-details");
 
   if (!bookKey) {
@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`
       : "https://via.placeholder.com/256x380?text=Brak+okładki";
 
-    // Render
     detailsEl.innerHTML = `
       <img src="${coverUrl}" alt="Okładka książki" style="max-width:200px;" />
       <h2>${title}</h2>
@@ -32,7 +31,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       <button id="save-btn">⭐ Zapisz do ulubionych</button>
     `;
 
-    // Obsługa zapisu
     document.getElementById("save-btn").addEventListener("click", async () => {
       const bookData = {
         key: book.key,

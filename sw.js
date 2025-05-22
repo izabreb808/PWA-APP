@@ -17,7 +17,6 @@ const FILES_TO_CACHE = [
   OFFLINE_URL
 ];
 
-// Install SW and cache essential files
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -27,7 +26,6 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
-// Activate SW and clean up old caches
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
@@ -41,10 +39,9 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Fetch handler
 self.addEventListener("fetch", (event) => {
   if (event.request.mode === "navigate") {
-    // Dla HTML fallback offline
+    // fallback offline
     event.respondWith(
       fetch(event.request).catch(() => caches.match(OFFLINE_URL))
     );

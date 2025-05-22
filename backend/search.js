@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      renderResults(data.docs.slice(0, 10)); // pokaż max 10 wyników
+      renderResults(data.docs.slice(0, 10)); // max 10 wyników
     } catch (error) {
       resultsSection.innerHTML = "<p>Błąd podczas pobierania danych.</p>";
       console.error(error);
