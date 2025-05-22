@@ -144,6 +144,8 @@ footer a:hover {
   max-width: 350px;
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
 }
 
 .loginPage h1 {
