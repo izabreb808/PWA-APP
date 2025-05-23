@@ -1,5 +1,4 @@
 const CACHE_NAME = "bookfinder-cache-v1";
-const OFFLINE_URL = "offline.html";
 
 const FILES_TO_CACHE = [
   "home.html",
@@ -8,15 +7,13 @@ const FILES_TO_CACHE = [
   "login.html",
   "offline.html",
   "manifest.json",
-  "sw.js",
   "../style.css",
   "../backend/search.js",
   "../backend/book.js",
   "../backend/indexedDB.js",
   "../backend/toRead.js",
   "../icons/icon.png",
-  "../icons/book.png",
-  OFFLINE_URL
+  "../icons/book.png"
 ];
 
 self.addEventListener("install", (event) => {
@@ -53,7 +50,7 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((cached) => {
       return cached || fetch(event.request).catch(() => {
-        return caches.match(OFFLINE_URL);
+        return caches.match("offline.html");
       });
     })
   );
