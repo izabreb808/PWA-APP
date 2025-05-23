@@ -6,15 +6,16 @@ const FILES_TO_CACHE = [
   "book.html",
   "toRead.html",
   "login.html",
+  "offline.html",
+  "manifest.json",
+  "sw.js",
   "../style.css",
   "../backend/search.js",
   "../backend/book.js",
-  "../backend/favorites.js",
-  "../backend/db.js",
+  "../backend/indexedDB.js",
+  "../backend/toRead.js",
   "../icons/icon.png",
   "../icons/book.png",
-  "manifest.json",
-  "sw.js",
   OFFLINE_URL
 ];
 
