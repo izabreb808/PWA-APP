@@ -2,18 +2,18 @@ const CACHE_NAME = "bookfinder-cache-v1";
 const OFFLINE_URL = "offline.html";
 
 const FILES_TO_CACHE = [
-  "frontend/home.html",
-  "frontend/book.html",
-  "frontend/toRead.html",
-  "frontend/login.html",
-  "style.css",
-  "backend/search.js",
-  "backend/book.js",
-  "backend/favorites.js",
-  "backend/db.js",
-  "icons/icon.png",
-  "icons/book.png",
-  "manifest.json",
+  "/frontend/home.html",
+  "/frontend/book.html",
+  "/frontend/toRead.html",
+  "/frontend/login.html",
+  "/style.css",
+  "/backend/search.js",
+  "/backend/book.js",
+  "/backend/favorites.js",
+  "/backend/db.js",
+  "/icons/icon.png",
+  "/icons/book.png",
+  "/manifest.json",
   OFFLINE_URL
 ];
 
@@ -39,15 +39,21 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-self.addEventListener("fetch", (event) => {
-  if (event.request.mode === "navigate") {
-    // fallback offline
-    event.respondWith(
-      fetch(event.request).catch(() => caches.match(OFFLINE_URL))
-    );
-  } else {
-    event.respondWith(
-      caches.match(event.request).then((res) => res || fetch(event.request))
-    );
-  }
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      return cached || fetch(event.request);
+    })
+  );
 });
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      return cached || fetch(event.request).catch(() => {
+        return caches.match(OFFLINE_URL);
+      });
+    })
+  );
+});
+
