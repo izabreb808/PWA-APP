@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Znajdź książkę</title>
     <link rel="stylesheet" href="../style.css">
-    <link rel="manifest" href="../manifest.json">
+    <link rel="manifest" href="manifest.json">
     <script defer src="../backend/search.js"></script>
 </head>
 <body>
@@ -48,7 +48,7 @@ if (logoutBtn) {
   <script>
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("../sw.js")
+      navigator.serviceWorker.register("sw.js")
         .then(() => console.log("✅ Service Worker zarejestrowany"))
         .catch(err => console.error("❌ Rejestracja SW nie powiodła się", err));
     });

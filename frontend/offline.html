@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Offline</title>
+<link rel="stylesheet" href="../style.css">
+<link rel="manifest" href="manifest.json">
   <style>
     body {
       font-family: sans-serif;
@@ -14,5 +16,14 @@
 <body>
   <h1>🔌 Brak połączenia</h1>
   <p>Jesteś offline. Sprawdź swoje połączenie internetowe.</p>
+      <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js")
+        .then(() => console.log("✅ Service Worker zarejestrowany"))
+        .catch(err => console.error("❌ Rejestracja SW nie powiodła się", err));
+    });
+  }
+</script>
 </body>
 </html>

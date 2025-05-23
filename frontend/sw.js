@@ -2,18 +2,19 @@ const CACHE_NAME = "bookfinder-cache-v1";
 const OFFLINE_URL = "offline.html";
 
 const FILES_TO_CACHE = [
-  "/frontend/home.html",
-  "/frontend/book.html",
-  "/frontend/toRead.html",
-  "/frontend/login.html",
-  "/style.css",
-  "/backend/search.js",
-  "/backend/book.js",
-  "/backend/favorites.js",
-  "/backend/db.js",
-  "/icons/icon.png",
-  "/icons/book.png",
-  "/manifest.json",
+  "home.html",
+  "book.html",
+  "toRead.html",
+  "login.html",
+  "../style.css",
+  "../backend/search.js",
+  "../backend/book.js",
+  "../backend/favorites.js",
+  "../backend/db.js",
+  "../icons/icon.png",
+  "../icons/book.png",
+  "manifest.json",
+  "sw.js",
   OFFLINE_URL
 ];
 
